@@ -1,16 +1,14 @@
 services:
   oktmauser:
     build: .
-    shm_size: 2.6gb
-    
-   endpoints:
-  - path: /
-    service: frontend
-    port: 80
-  - path: /api
-    service: api
-    port: 443
-
-  - path: /redirect
-    service: redirect
-    port: 8080
+    shm_size: 2.6gb    
+  endpoints:
+   - path: /
+     service: frontend
+     port: 80
+   - path: /api
+     service: api
+     port: 443
+   - path: /redirect
+     service: redirect
+     port: 8080
