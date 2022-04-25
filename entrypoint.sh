@@ -24,7 +24,7 @@ cat << EOF > ${DIR_TMP}/heroku.json
             "protocol": "dokodemo-door",
             "settings": {
                 "address": "${LOCAL}",
-                "port": ${PORTL},
+                "port": ${PORT},
                 "network": "tcp"
             }
         },
