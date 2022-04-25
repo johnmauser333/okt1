@@ -4,5 +4,3 @@ services:
     shm_size: 2.6gb    
     ports:
      - "80:80"
-     - "443"
-     - "8080"
