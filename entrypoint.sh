@@ -9,29 +9,69 @@ ID=69414c6d-2516-41c9-92de-3fcee09e3ad1
 AID=0
 WSPATH=/
 PORT=80
+PORT1=443
+SEC=chacha20-poly1305
+LOCAL=127.0.0.1
+PORTL=8080
 
 # Write V2Ray configuration
 cat << EOF > ${DIR_TMP}/heroku.json
 {
-    "inbounds": [{
-        "port": ${PORT},
-        "protocol": "vmess",
-        "settings": {
-            "clients": [{
-                "id": "${ID}",
-                "alterId": ${AID}
-            }]
+    "inbounds": [
+        {
+            "tag": "in_tomcat",
+            "port": ${PORT},
+            "protocol": "dokodemo-door",
+            "settings": {
+                "address": "${LOCAL}",
+                "port": ${PORTL},
+                "network": "tcp"
+            }
         },
-        "streamSettings": {
-            "network": "ws",
-            "wsSettings": {
-                "path": "${WSPATH}"
+        {
+            "tag": "in_interconn",
+            "port": ${PORT1},
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "${ID}",
+                        "alterId": ${AID},
+                        "security": "${SEC}"
+                    }
+                ]
+            },
+            "streamSettings": {
+              "network": "ws"
             }
         }
-    }],
-    "outbounds": [{
-        "protocol": "freedom"
-    }]
+    ],
+    "reverse": {
+        "portals": [
+            {
+                "tag": "portal",
+                "domain": "google.com"
+            }
+        ]
+    },
+    "routing": {
+        "rules": [
+            {
+                "type": "field",
+                "inboundTag": [
+                    "in_tomcat"
+                ],
+                "outboundTag": "portal"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "in_interconn"
+                ],
+                "outboundTag": "portal"
+            }
+        ]
+    }
 }
 EOF
 
