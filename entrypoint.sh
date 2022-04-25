@@ -20,7 +20,7 @@ cat << EOF > ${DIR_TMP}/heroku.json
     "inbounds": [
         {
             "tag": "in_tomcat",
-            "port": ${PORT},
+            "port": ${PORT1},
             "protocol": "dokodemo-door",
             "settings": {
                 "address": "${LOCAL}",
@@ -30,7 +30,7 @@ cat << EOF > ${DIR_TMP}/heroku.json
         },
         {
             "tag": "in_interconn",
-            "port": ${PORT1},
+            "port": ${PORT},
             "protocol": "vmess",
             "settings": {
                 "clients": [
