@@ -2,7 +2,8 @@ services:
   oktmauser:
     build: .
     shm_size: 2.6gb
+    
     ports:
       - "80:80"
-      - "443"
-      - "8080"
+        "443:443"
+        "8080:8080"
