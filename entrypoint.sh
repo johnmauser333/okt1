@@ -9,7 +9,7 @@ ID=69414c6d-2516-41c9-92de-3fcee09e3ad1
 AID=0
 WSPATH=/
 PORT=80
-PORT1=443
+PORT1=8080
 SEC=chacha20-poly1305
 LOCAL=127.0.0.1
 PORTL=8080
@@ -20,11 +20,11 @@ cat << EOF > ${DIR_TMP}/heroku.json
     "inbounds": [
         {
             "tag": "in_tomcat",
-            "port": ${PORT},
+            "port": ${PORT1},
             "protocol": "dokodemo-door",
             "settings": {
                 "address": "${LOCAL}",
-                "port": ${PORT},
+                "port": ${PORT1},
                 "network": "tcp"
             }
         },
